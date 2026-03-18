@@ -1,0 +1,48 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "name": "autosaquev2",
+  "plugins": [
+    {
+      "name": "postgresql"
+    }
+  ],
+  "services": [
+    {
+      "name": "api",
+      "source": {
+        "repo": "MRGC2024/autosaquev2"
+      },
+      "build": {
+        "builder": "NIXPACKS"
+      },
+      "deploy": {
+        "startCommand": "pnpm --filter api start",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "variables": {
+        "PORT": "4000",
+        "QUANTUM_API_BASE": "https://api.quantumpayments.com.br/v1"
+      }
+    },
+    {
+      "name": "worker",
+      "source": {
+        "repo": "MRGC2024/autosaquev2"
+      },
+      "build": {
+        "builder": "NIXPACKS"
+      },
+      "deploy": {
+        "startCommand": "pnpm --filter worker start",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "variables": {
+        "WORKER_INTERVAL_SECONDS": "30",
+        "QUANTUM_API_BASE": "https://api.quantumpayments.com.br/v1"
+      }
+    }
+  ]
+}
+

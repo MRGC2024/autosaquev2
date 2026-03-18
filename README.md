@@ -6,6 +6,11 @@ Monorepo (pnpm) com:
 - `apps/api`: API (Express) para configurações, saques, logs e integração QuantumPayments
 - `apps/worker`: worker (Node) para monitorar saldo, disparar saque automático e enviar alertas no Telegram
 
+## Deploy com 1 clique
+
+- **Railway (API + Worker + Postgres)**: clique em [Deploy on Railway](https://railway.com/new/template?template=https://github.com/MRGC2024/autosaquev2)
+- **Vercel (Web/painel)**: clique em [Deploy to Vercel](https://vercel.com/new/git/external?repository-url=https://github.com/MRGC2024/autosaquev2&root-directory=apps/web&project-name=autosaquev2-web&env=NEXT_PUBLIC_API_URL&envDescription=URL%20p%C3%BAblica%20da%20API%20(Railway))
+
 ## Requisitos
 
 - Node.js 18+
