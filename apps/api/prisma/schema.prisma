@@ -17,6 +17,9 @@ model AppConfig {
   pixKey                 String   @default("")
   pixKeyType             String   @default("random") // cpf/cnpj/email/phone/random
 
+  // Permite adaptar o payload sem precisar alterar código
+  quantumTransferPayload Json?
+
   telegramBotToken       String?  // opcional: pode ficar só no worker
   telegramChatId         String?
 

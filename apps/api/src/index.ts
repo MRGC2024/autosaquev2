@@ -24,6 +24,7 @@ const upsertConfigSchema = z.object({
   thresholdCents: z.number().int().nonnegative().optional(),
   pixKey: z.string().min(1).optional(),
   pixKeyType: z.string().min(1).optional(),
+  quantumTransferPayload: z.unknown().optional(),
   telegramBotToken: z.string().min(1).nullable().optional(),
   telegramChatId: z.string().min(1).nullable().optional(),
   quantumBasicAuth: z.string().min(1).nullable().optional(),
