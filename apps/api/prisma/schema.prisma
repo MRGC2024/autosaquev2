@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AppConfig {
+  id                     String   @id @default(cuid())
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  enabled                Boolean  @default(false)
+  thresholdCents         Int      @default(0)
+  pixKey                 String   @default("")
+  pixKeyType             String   @default("random") // cpf/cnpj/email/phone/random
+
+  telegramBotToken       String?  // opcional: pode ficar só no worker
+  telegramChatId         String?
+
+  quantumBasicAuth       String?  // opcional: pode ficar só no worker
+  quantumWithdrawKey     String?
+
+  minIntervalSeconds     Int      @default(60)
+  lastAutoWithdrawalAt   DateTime?
+}
+
+model Withdrawal {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  providerId     String?  @unique
+  amountCents    Int
+  pixKey         String
+  status         String   @default("created") // created/processing/succeeded/failed
+  raw            Json?
+  error          String?
+}
+
+model EventLog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  type      String
+  message   String
+  data      Json?
+}
+
